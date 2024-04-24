@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\StafController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,25 +22,29 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-/**Route::get('/', function () {
-    return view('login');
-});
+Route::get('dashboard', [DashboardController::class, 'index']);
+Route::resource('pegawai', PegawaiController::class);
+Route::resource('staf', StafController::class);
 
-Route::get('/register', function () {
-    return view('register');
-});
 
-*/
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-Route::get('/staf', function () {
-    return view('staf');
-});
-Route::get('/datastaf_entry', function () {
-    return view('datastaf_entry');
-});
+// Route::get('/', function () {
+//     return view('login');
+// });
+
+// Route::get('/register', function () {
+//     return view('register');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// });
+// Route::get('/staf', function () {
+//     return view('staf');
+// });
+// Route::get('/datastaf_entry', function () {
+//     return view('datastaf_entry');
+// });
 
 Route::get('/supir', function () {
     return view('supir');
@@ -51,15 +58,15 @@ Route::get('/mesin', function () {
 Route::get('/kenek', function () {
     return view('kenek');
 });
-Route::get('/datapegawai', function () {
-    return view('datapegawai');
-});
+// Route::get('/datapegawai', function () {
+//     return view('datapegawai');
+// });
 Route::get('/absen', function () {
     return view('absen');
 });
 Route::get('/jamkerja', function () {
     return view('jamkerja');
 });
-Route::get('/pengaturan', function () {
-    return view('pengaturan');
-});
+// Route::get('/pengaturan', function () {
+//     return view('pengaturan');
+// });
