@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nama_pegawai
  * @property string $alamat
  * @property string $no_telp
+ * @property string $email
+ * @property string $password
  * 
  * @property Collection|TbJamKerja[] $tb_jam_kerjas
  * @property Collection|TbStaf[] $tb_stafs
@@ -29,10 +31,16 @@ class TbPegawai extends Model
 	protected $primaryKey = 'id_pegawai';
 	public $timestamps = false;
 
+	protected $hidden = [
+		'password'
+	];
+
 	protected $fillable = [
 		'nama_pegawai',
 		'alamat',
-		'no_telp'
+		'no_telp',
+		'email',
+		'password'
 	];
 
 	public function tb_jam_kerjas()

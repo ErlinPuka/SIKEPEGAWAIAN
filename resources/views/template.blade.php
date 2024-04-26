@@ -52,7 +52,7 @@
                                     <a href="{{ url('staf') }}" class="submenu-link">Staf</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="component-alert.html" class="submenu-link">Supir</a>
+                                    <a href="{{ url('supir') }}" class="submenu-link">Supir</a>
                                 </li>
                                 <li class="submenu-item  ">
                                     <a href="component-badge.html" class="submenu-link">Palet</a>
@@ -77,7 +77,7 @@
                             <ul class="submenu ">
 
                                 <li class="submenu-item  ">
-                                    <a href="extra-component-avatar.html" class="submenu-link">Data Pegawai</a>
+                                    <a href="{{ url('pegawai') }}" class="submenu-link">Data Pegawai</a>
                                 </li>
                                 <li class="submenu-item  ">
                                     <a href="extra-component-comment.html" class="submenu-link">Jam Kerja</a>

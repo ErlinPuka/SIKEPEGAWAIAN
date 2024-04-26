@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
+use App\Models\TbSupir;
 use Illuminate\Http\Request;
 
-class PegawaiController extends Controller
+class SupirController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $data = TbPegawai::all();
-        return view('pegawai/index', compact('data'));
+        $data = TbSupir::all();
+        return view('supir/index', compact('data'));
     }
 
     /**
@@ -25,7 +26,8 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view('pegawai/create');
+        $data['pegawai'] = TbPegawai::all();
+        return view('supir/create', $data);
     }
 
     /**
@@ -36,14 +38,12 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        TbPegawai::create([
-            'nama_pegawai' => $request->nama_pegawai,
-            'alamat' => $request->alamat,
-            'no_telp'  => $request->no_telp,
-            'email'  => $request->email,
-            'password'  => md5($request->password),
+        TbSupir::create([
+            'id_pegawai' => $request->id_pegawai,
+            'transport'  => $request->transport,
+            'rit_angkutan'  => $request->rit_angkutan,
         ]);
-        return redirect("pegawai")->with("message", "Data berhasil disimpan");
+        return redirect("supir")->with("message", "Data berhasil disimpan");
     }
 
     /**
@@ -54,7 +54,7 @@ class PegawaiController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -63,9 +63,11 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TbPegawai $pegawai)
+    public function edit(TbSupir $supir)
     {
-        return view('pegawai/edit', compact('pegawai'));
+        $data["pegawaiExist"] = TbPegawai::find($supir->id_pegawai);
+        $data['pegawai'] = TbPegawai::all();
+        return view('supir/edit', compact('supir'), $data);
     }
 
     /**
@@ -75,21 +77,14 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TbPegawai $pegawai)
+    public function update(Request $request, TbSupir $supir)
     {
-        $data = [
-            'nama_pegawai' => $request->nama_pegawai,
-            'alamat' => $request->alamat,
-            'no_telp'  => $request->no_telp,
-            'email'  => $request->email,
-        ];
-
-        if ($request->password) {
-            $data['password'] = md5($request->password);
-        }
-
-        $pegawai->update($data);
-        return redirect("pegawai")->with("message", "Data berhasil disimpan");
+        $supir->update([
+            'id_pegawai' => $request->id_pegawai,
+            'transport'  => $request->transport,
+            'rit_angkutan'  => $request->rit_angkutan,
+        ]);
+        return redirect("supir")->with("message", "Data berhasil disimpan");
     }
 
     /**
@@ -98,9 +93,9 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TbPegawai $pegawai)
+    public function destroy( TbSupir $supir)
     {
-        $pegawai->delete();
-        return redirect("pegawai")->with("message", "Data berhasil dihapus");
+        $supir->delete();
+        return redirect("supir")->with("message", "Data berhasil dihapus");
     }
 }

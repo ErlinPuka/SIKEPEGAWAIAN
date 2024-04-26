@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\StafController;
+use App\Http\Controllers\SupirController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::resource('pegawai', PegawaiController::class);
 Route::resource('staf', StafController::class);
+Route::resource('supir', SupirController::class);
 
 
 
@@ -46,9 +48,9 @@ Route::resource('staf', StafController::class);
 //     return view('datastaf_entry');
 // });
 
-Route::get('/supir', function () {
-    return view('supir');
-});
+// Route::get('/supir', function () {
+//     return view('supir');
+// });
 Route::get('/palet', function () {
     return view('palet');
 });
