@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $jam_kerja
  * 
  * @property TbPegawai $tb_pegawai
+ * @property Collection|TbPalet[] $tb_palets
  * @property Collection|TbStaf[] $tb_stafs
  *
  * @package App\Models
@@ -39,6 +40,11 @@ class TbJamKerja extends Model
 	public function tb_pegawai()
 	{
 		return $this->belongsTo(TbPegawai::class, 'id_pegawai');
+	}
+
+	public function tb_palets()
+	{
+		return $this->hasMany(TbPalet::class, 'id_jam_kerja');
 	}
 
 	public function tb_stafs()

@@ -11,13 +11,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Edit Data Staf</h3>
+                        <h3>Tambah Data Pegawai</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit Data Staf</li>
+                                <li class="breadcrumb-item active" aria-current="page">Tambah Data Pegawai</li>
                             </ol>
                         </nav>
                     </div>
@@ -29,43 +29,44 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="{{ route('staf.update', $staf->id_staf) }}"
-                                        method="post" enctype="multipart/form-data">
+                                    <form class="form form-vertical" action="{{ route('pegawai.store') }}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
-                                        @method('PUT')
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="first-name-vertical">Nama</label>
-                                                        <select class="form-control" name="id_pegawai" id="id_pegawai"
-                                                            required>
-                                                            <option value="" selected>Pilih Pegawai</option>
-                                                            @foreach ($pegawai as $k)
-                                                                <option
-                                                                    {{ $k->id_pegawai == $pegawaiExist->id_pegawai ? 'selected' : '' }}
-                                                                    value="{{ $k->id_pegawai }}">
-                                                                    {{ $k->nama_pegawai }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="email-id-vertical">Jabatan</label>
                                                         <input type="text" id="email-id-vertical" class="form-control"
-                                                            placeholder="Jabatan" name="jabatan"
-                                                            value="{{ $staf->jabatan }}" required>
+                                                            placeholder="Nama" name="nama_pegawai" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="contact-info-vertical">Jam Kerja</label>
-                                                        <select class="form-control" name="id_jam_kerja" id="id_jam_kerja"
-                                                            required>
-                                                            <option value="" selected>Pilih Jam Kerja</option>
-                                                        </select>
+                                                        <label for="email-id-vertical">Alamat</label>
+                                                        <input type="text" id="email-id-vertical" class="form-control"
+                                                            placeholder="Alamat" name="alamat" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="contact-info-vertical">Nomor Telepon</label>
+                                                        <input type="text" id="email-id-vertical" class="form-control"
+                                                            placeholder="Nomor Telepon" name="no_telp" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="contact-info-vertical">Email</label>
+                                                        <input type="email" id="email-id-vertical" class="form-control"
+                                                            placeholder="Email" name="email" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="contact-info-vertical">Password</label>
+                                                        <input type="text" id="email-id-vertical" class="form-control"
+                                                            placeholder="Password" name="password" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">

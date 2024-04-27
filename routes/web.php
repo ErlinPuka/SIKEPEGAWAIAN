@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JamKerjaController;
+use App\Http\Controllers\PaletController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\StafController;
 use App\Http\Controllers\SupirController;
@@ -22,11 +24,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('index');
 // });
-
+Route::get('/get-jam-kerja/{pegawaiId}', [JamKerjaController::class, 'getJamKerjaByPegawai']);
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::resource('pegawai', PegawaiController::class);
 Route::resource('staf', StafController::class);
 Route::resource('supir', SupirController::class);
+Route::resource('palet', PaletController::class);
 
 
 
@@ -51,9 +54,9 @@ Route::resource('supir', SupirController::class);
 // Route::get('/supir', function () {
 //     return view('supir');
 // });
-Route::get('/palet', function () {
-    return view('palet');
-});
+// Route::get('/palet', function () {
+//     return view('palet');
+// });
 Route::get('/mesin', function () {
     return view('mesin');
 });

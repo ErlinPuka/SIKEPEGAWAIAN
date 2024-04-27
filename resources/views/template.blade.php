@@ -55,16 +55,16 @@
                                     <a href="{{ url('supir') }}" class="submenu-link">Supir</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="component-badge.html" class="submenu-link">Palet</a>
+                                    <a href="{{ url('palet') }}" class="submenu-link">Palet</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="component-breadcrumb.html" class="submenu-link">Mesin</a>
+                                    <a href="{{ url('mesin') }}" class="submenu-link">Mesin</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="component-button.html" class="submenu-link">Kenek</a>
+                                    <a href="{{ url('kenek') }}" class="submenu-link">Kenek</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="component-card.html" class="submenu-link">Satpam</a>
+                                    <a href="{{ url('satpam') }}" class="submenu-link">Satpam</a>
                                 </li>
                             </ul>
                         </li>
@@ -80,18 +80,18 @@
                                     <a href="{{ url('pegawai') }}" class="submenu-link">Data Pegawai</a>
                                 </li>
                                 <li class="submenu-item  ">
-                                    <a href="extra-component-comment.html" class="submenu-link">Jam Kerja</a>
+                                    <a href="{{ url('jam_kerja') }}" class="submenu-link">Jam Kerja</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
+                            <a href="{{ url('absensi') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>Absensi Karyawan</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
+                            <a href="{{ url('pengaturan') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>
                             </a>
@@ -102,6 +102,49 @@
         </div>
         @yield('content')
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectPegawai = document.getElementById('id_pegawai');
+            const selectJamKerja = document.getElementById('id_jam_kerja');
+
+            selectPegawai.addEventListener('change', function() {
+                const selectedPegawaiId = selectPegawai.value;
+                // Kirim permintaan Ajax untuk mendapatkan jam kerja yang sesuai dengan pegawai yang dipilih
+                fetch(`/get-jam-kerja/${selectedPegawaiId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Hapus semua opsi yang ada pada select jam kerja
+                        selectJamKerja.innerHTML = '';
+                        // Tambahkan opsi jam kerja yang baru
+                        data.forEach(jamKerja => {
+                            const option = document.createElement('option');
+                            option.value = jamKerja.id_jam_kerja;
+                            option.textContent = jamKerja.jam_kerja;
+                            selectJamKerja.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Terjadi kesalahan:', error));
+            });
+
+            // Lakukan permintaan Ajax saat halaman dimuat untuk pertama kali
+            const initialPegawaiId = selectPegawai.value;
+            fetch(`/get-jam-kerja/${initialPegawaiId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Hapus semua opsi yang ada pada select jam kerja
+                    selectJamKerja.innerHTML = '';
+                    // Tambahkan opsi jam kerja yang baru
+                    data.forEach(jamKerja => {
+                        const option = document.createElement('option');
+                        option.value = jamKerja.id_jam_kerja;
+                        option.textContent = jamKerja.jam_kerja;
+                        selectJamKerja.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Terjadi kesalahan:', error));
+        });
+    </script>
+
     <script src="{{ asset('static/js/components/dark.js') }}"></script>
     <script src="{{ asset('extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 

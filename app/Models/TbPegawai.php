@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $password
  * 
  * @property Collection|TbJamKerja[] $tb_jam_kerjas
+ * @property Collection|TbPalet[] $tb_palets
  * @property Collection|TbStaf[] $tb_stafs
  * @property Collection|TbSupir[] $tb_supirs
  *
@@ -46,6 +47,11 @@ class TbPegawai extends Model
 	public function tb_jam_kerjas()
 	{
 		return $this->hasMany(TbJamKerja::class, 'id_pegawai');
+	}
+
+	public function tb_palets()
+	{
+		return $this->hasMany(TbPalet::class, 'id_pegawai');
 	}
 
 	public function tb_stafs()

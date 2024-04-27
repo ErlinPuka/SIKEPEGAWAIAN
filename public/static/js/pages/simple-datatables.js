@@ -1,52 +1,58 @@
-let dataTable = new simpleDatatables.DataTable(
-  document.getElementById("table1")
-)
-// Move "per page dropdown" selector element out of label
-// to make it work with bootstrap 5. Add bs5 classes.
-function adaptPageDropdown() {
-  const selector = dataTable.wrapper.querySelector(".dataTable-selector")
-  selector.parentNode.parentNode.insertBefore(selector, selector.parentNode)
-  selector.classList.add("form-select")
+// Inisialisasi DataTable untuk kedua tabel
+let dataTable1 = new simpleDatatables.DataTable(document.getElementById("table1"));
+let dataTable2 = new simpleDatatables.DataTable(document.getElementById("table2"));
+
+// Fungsi untuk menyesuaikan elemen "per page dropdown"
+function adaptPageDropdown(tableWrapper) {
+  const selector = tableWrapper.querySelector(".dataTable-selector");
+  selector.parentNode.parentNode.insertBefore(selector, selector.parentNode);
+  selector.classList.add("form-select");
 }
 
-// Add bs5 classes to pagination elements
-function adaptPagination() {
-  const paginations = dataTable.wrapper.querySelectorAll(
-    "ul.dataTable-pagination-list"
-  )
+// Fungsi untuk menyesuaikan elemen-elemen pagination
+function adaptPagination(tableWrapper) {
+  const paginations = tableWrapper.querySelectorAll("ul.dataTable-pagination-list");
 
   for (const pagination of paginations) {
-    pagination.classList.add(...["pagination", "pagination-primary"])
+    pagination.classList.add(...["pagination", "pagination-primary"]);
   }
 
-  const paginationLis = dataTable.wrapper.querySelectorAll(
-    "ul.dataTable-pagination-list li"
-  )
+  const paginationLis = tableWrapper.querySelectorAll("ul.dataTable-pagination-list li");
 
   for (const paginationLi of paginationLis) {
-    paginationLi.classList.add("page-item")
+    paginationLi.classList.add("page-item");
   }
 
-  const paginationLinks = dataTable.wrapper.querySelectorAll(
-    "ul.dataTable-pagination-list li a"
-  )
+  const paginationLinks = tableWrapper.querySelectorAll("ul.dataTable-pagination-list li a");
 
   for (const paginationLink of paginationLinks) {
-    paginationLink.classList.add("page-link")
+    paginationLink.classList.add("page-link");
   }
 }
 
+// Fungsi untuk menyegarkan pagination setelah perubahan
 const refreshPagination = () => {
-  adaptPagination()
-}
+  adaptPagination(dataTable1.wrapper);
+  adaptPagination(dataTable2.wrapper);
+};
 
-// Patch "per page dropdown" and pagination after table rendered
-dataTable.on("datatable.init", () => {
-  adaptPageDropdown()
-  refreshPagination()
-})
-dataTable.on("datatable.update", refreshPagination)
-dataTable.on("datatable.sort", refreshPagination)
+// Patch "per page dropdown" dan pagination setelah tabel diinisialisasi
+dataTable1.on("datatable.init", () => {
+  adaptPageDropdown(dataTable1.wrapper);
+  refreshPagination();
+});
+dataTable1.on("datatable.update", refreshPagination);
+dataTable1.on("datatable.sort", refreshPagination);
+dataTable1.on("datatable.page", () => {
+  adaptPagination(dataTable1.wrapper);
+});
 
-// Re-patch pagination after the page was changed
-dataTable.on("datatable.page", adaptPagination)
+dataTable2.on("datatable.init", () => {
+  adaptPageDropdown(dataTable2.wrapper);
+  refreshPagination();
+});
+dataTable2.on("datatable.update", refreshPagination);
+dataTable2.on("datatable.sort", refreshPagination);
+dataTable2.on("datatable.page", () => {
+  adaptPagination(dataTable2.wrapper);
+});

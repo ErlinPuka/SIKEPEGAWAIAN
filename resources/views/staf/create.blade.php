@@ -16,7 +16,7 @@
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tambah Data Staf</li>
                             </ol>
                         </nav>
@@ -29,45 +29,43 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="{{ route('staf.store') }}" method="post" enctype="multipart/form-data">
-                                      @csrf
+                                    <form class="form form-vertical" action="{{ route('staf.store') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="first-name-vertical">Nama</label>
-                                                        <select class="form-control" name="id_pegawai" id="id_pegawai" required>
-                                                          <option value="" selected>Pilih Pegawai</option>
-                                                          @foreach ($pegawai as $k)
-                                                              <option value="{{ $k->id_pegawai }}">
-                                                                  {{ $k->nama_pegawai }}
-                                                              </option>
-                                                          @endforeach
-                                                      </select>
+                                                        <select class="form-control" name="id_pegawai" id="id_pegawai"
+                                                            required>
+                                                            <option value="" selected>Pilih Pegawai</option>
+                                                            @foreach ($pegawai as $k)
+                                                                <option value="{{ $k->id_pegawai }}">
+                                                                    {{ $k->nama_pegawai }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="email-id-vertical">Jabatan</label>
-                                                        <input type="text" id="email-id-vertical" class="form-control" placeholder="Jabatan" name="jabatan" required>
+                                                        <input type="text" id="email-id-vertical" class="form-control"
+                                                            placeholder="Jabatan" name="jabatan" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="contact-info-vertical">Jam Kerja</label>
-                                                        <select class="form-control" name="id_jam_kerja" id="id_jam_kerja" required>
+                                                        <select class="form-control" name="id_jam_kerja" id="id_jam_kerja"
+                                                            required>
                                                             <option value="" selected>Pilih Jam Kerja</option>
-                                                          @foreach ($jam_kerja as $k)
-                                                              <option value="{{ $k->id_jam_kerja }}">
-                                                                  {{ $k->jam_kerja }}
-                                                              </option>
-                                                          @endforeach
-                                                      </select>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <button type="submit"
-                                                        class="btn btn-primary me-1 mb-1">Submit</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                                 </div>
                                             </div>
                                         </div>

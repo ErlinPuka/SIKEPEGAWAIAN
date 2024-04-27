@@ -11,13 +11,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Edit Data Staf</h3>
+                        <h3>Edit Data Palet</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit Data Staf</li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Data Palet</li>
                             </ol>
                         </nav>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="{{ route('staf.update', $staf->id_staf) }}"
+                                    <form class="form form-vertical" action="{{ route('palet.update', $palet->id_palet) }}"
                                         method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
@@ -53,10 +53,10 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="email-id-vertical">Jabatan</label>
+                                                        <label for="email-id-vertical">Jumlah Palet</label>
                                                         <input type="text" id="email-id-vertical" class="form-control"
-                                                            placeholder="Jabatan" name="jabatan"
-                                                            value="{{ $staf->jabatan }}" required>
+                                                            placeholder="Jumlah Palet" name="jumlah_palet"
+                                                            value="{{ $palet->jumlah_palet }}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -66,6 +66,27 @@
                                                             required>
                                                             <option value="" selected>Pilih Jam Kerja</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="email-id-vertical">Jenis Palet</label>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="jenis_palet" id="jenis_palet1" value="1"
+                                                                {{ $palet->jenis_palet == 1 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="jenis_palet1">
+                                                                Palet 1
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="jenis_palet" id="jenis_palet2" value="2"
+                                                                {{ $palet->jenis_palet == 2 ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="jenis_palet2">
+                                                                Palet 2
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
