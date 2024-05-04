@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
-use App\Models\TbSupir;
+use App\Models\TbPresensi;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class SupirController extends Controller
+class PresensiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class SupirController extends Controller
      */
     public function index()
     {
-        $data = TbSupir::all();
-        $title = 'Hapus Supir';
+        $data = TbPresensi::all();
+        $title = 'Hapus Presensi';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('supir/index', compact('data'));
+        return view('presensi/index', compact('data'));
     }
 
     /**
@@ -31,7 +31,7 @@ class SupirController extends Controller
     public function create()
     {
         $data['pegawai'] = TbPegawai::all();
-        return view('supir/create', $data);
+        return view('presensi/create', $data);
     }
 
     /**
@@ -42,14 +42,23 @@ class SupirController extends Controller
      */
     public function store(Request $request)
     {
-        TbSupir::create([
-            'id_pegawai' => $request->id_pegawai,
-            'transport'  => $request->transport,
-            'rit_angkutan'  => $request->rit_angkutan,
+        $validatedData = $request->validate([
+            'tanggal' => 'required|date', // Pastikan tanggal diisi dan merupakan format tanggal yang valid
+            'presensi.*' => 'required|in:Hadir,Sakit', // Pastikan setiap opsi presensi adalah Hadir atau Sakit
         ]);
+
+        // Simpan data presensi ke dalam database
+        foreach ($validatedData['presensi'] as $pegawaiId => $statusPresensi) {
+            // Lakukan operasi penyimpanan data presensi di sini
+            $presensi = new TbPresensi();
+            $presensi->id_pegawai = $pegawaiId;
+            $presensi->status_presensi = $statusPresensi;
+            $presensi->tanggal = $validatedData['tanggal'];
+            $presensi->save();
+        }
         Alert::success("Success", "Data berhasil disimpan");
 
-        return redirect("supir");
+        return redirect("presensi");
     }
 
     /**
@@ -60,6 +69,7 @@ class SupirController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -68,11 +78,9 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TbSupir $supir)
+    public function edit(TbPresensi $presensi)
     {
-        $data["pegawaiExist"] = TbPegawai::find($supir->id_pegawai);
-        $data['pegawai'] = TbPegawai::all();
-        return view('supir/edit', compact('supir'), $data);
+        return view('presensi/edit', compact('presensi'));
     }
 
     /**
@@ -82,16 +90,15 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TbSupir $supir)
+    public function update(Request $request, TbPresensi $presensi)
     {
-        $supir->update([
+        $presensi->update([
             'id_pegawai' => $request->id_pegawai,
-            'transport'  => $request->transport,
-            'rit_angkutan'  => $request->rit_angkutan,
+            'status_presensi' => $request->status_presensi,
+            'tanggal'  => $request->tanggal,
         ]);
         Alert::success("Success", "Data berhasil disimpan");
-
-        return redirect("supir");
+        return redirect("presensi");
     }
 
     /**
@@ -100,11 +107,10 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TbSupir $supir)
+    public function destroy(TbPresensi $presensi)
     {
-        $supir->delete();
+        $presensi->delete();
         Alert::success("Success", "Data berhasil dihapus");
-
-        return redirect("supir");
+        return redirect("presensi");
     }
 }

@@ -6,6 +6,7 @@ use App\Models\TbJamKerja;
 use App\Models\TbPegawai;
 use App\Models\TbStaf;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StafController extends Controller
 {
@@ -17,6 +18,9 @@ class StafController extends Controller
     public function index()
     {
         $data = TbStaf::all();
+        $title = 'Hapus Staf';
+        $text = "Apakah anda yakin untuk hapus?";
+        confirmDelete($title, $text);
         return view('staf/index', compact('data'));
     }
 
@@ -28,7 +32,6 @@ class StafController extends Controller
     public function create()
     {
         $data['pegawai'] = TbPegawai::all();
-        $data['jam_kerja'] = TbJamKerja::all();
         return view('staf/create', $data);
     }
 
@@ -45,7 +48,9 @@ class StafController extends Controller
             'id_jam_kerja' => $request->id_jam_kerja,
             'jabatan'  => $request->jabatan,
         ]);
-        return redirect("staf")->with("message", "Data berhasil disimpan");
+        Alert::success("Success", "Data berhasil disimpan");
+
+        return redirect("staf");
     }
 
     /**
@@ -69,8 +74,6 @@ class StafController extends Controller
     {
         $data["pegawaiExist"] = TbPegawai::find($staf->id_pegawai);
         $data['pegawai'] = TbPegawai::all();
-        $data["jamKerjaExist"] = TbJamKerja::find($staf->id_jam_kerja);
-        $data['jam_kerja'] = TbJamKerja::all();
         return view('staf/edit', compact('staf'), $data);
     }
 
@@ -88,7 +91,9 @@ class StafController extends Controller
             'id_jam_kerja' => $request->id_jam_kerja,
             'jabatan'  => $request->jabatan,
         ]);
-        return redirect("staf")->with("message", "Data berhasil disimpan");
+        Alert::success("Success", "Data berhasil disimpan");
+
+        return redirect("staf");
     }
 
     /**
@@ -100,7 +105,9 @@ class StafController extends Controller
     public function destroy(TbStaf $staf)
     {
         $staf->delete();
-        return redirect("staf")->with("message", "Data berhasil dihapus");
+        Alert::success("Success", "Data berhasil dihapus");
+
+        return redirect("staf");
 
     }
 }

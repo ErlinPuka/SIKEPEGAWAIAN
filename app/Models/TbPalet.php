@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_pegawai
  * @property int $id_jam_kerja
  * @property int $jumlah_palet
- * @property string $jenis_palet
+ * @property int $jenis_palet
  * 
  * @property TbJamKerja $tb_jam_kerja
  * @property TbPegawai $tb_pegawai
@@ -31,7 +31,8 @@ class TbPalet extends Model
 	protected $casts = [
 		'id_pegawai' => 'int',
 		'id_jam_kerja' => 'int',
-		'jumlah_palet' => 'int'
+		'jumlah_palet' => 'int',
+		'jenis_palet' => 'int'
 	];
 
 	protected $fillable = [

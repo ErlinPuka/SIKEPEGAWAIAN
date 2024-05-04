@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property TbPegawai $tb_pegawai
  * @property Collection|TbPalet[] $tb_palets
+ * @property Collection|TbPegMesin[] $tb_peg_mesins
  * @property Collection|TbStaf[] $tb_stafs
  *
  * @package App\Models
@@ -45,6 +46,11 @@ class TbJamKerja extends Model
 	public function tb_palets()
 	{
 		return $this->hasMany(TbPalet::class, 'id_jam_kerja');
+	}
+
+	public function tb_peg_mesins()
+	{
+		return $this->hasMany(TbPegMesin::class, 'id_jam_kerja');
 	}
 
 	public function tb_stafs()

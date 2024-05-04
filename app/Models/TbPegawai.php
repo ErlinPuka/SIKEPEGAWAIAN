@@ -8,25 +8,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class TbPegawai
- * 
+ *
  * @property int $id_pegawai
  * @property string $nama_pegawai
  * @property string $alamat
  * @property string $no_telp
  * @property string $email
  * @property string $password
- * 
+ *
  * @property Collection|TbJamKerja[] $tb_jam_kerjas
+ * @property Collection|TbKenek[] $tb_keneks
  * @property Collection|TbPalet[] $tb_palets
+ * @property Collection|TbPegMesin[] $tb_peg_mesins
+ * @property Collection|TbPresensi[] $tb_presensis
+ * @property Collection|TbSatpam[] $tb_satpams
  * @property Collection|TbStaf[] $tb_stafs
  * @property Collection|TbSupir[] $tb_supirs
  *
  * @package App\Models
  */
-class TbPegawai extends Model
+class TbPegawai extends Authenticatable
 {
 	protected $table = 'tb_pegawai';
 	protected $primaryKey = 'id_pegawai';
@@ -49,9 +54,29 @@ class TbPegawai extends Model
 		return $this->hasMany(TbJamKerja::class, 'id_pegawai');
 	}
 
+	public function tb_keneks()
+	{
+		return $this->hasMany(TbKenek::class, 'id_pegawai');
+	}
+
 	public function tb_palets()
 	{
 		return $this->hasMany(TbPalet::class, 'id_pegawai');
+	}
+
+	public function tb_peg_mesins()
+	{
+		return $this->hasMany(TbPegMesin::class, 'id_pegawai');
+	}
+
+	public function tb_presensis()
+	{
+		return $this->hasMany(TbPresensi::class, 'id_pegawai');
+	}
+
+	public function tb_satpams()
+	{
+		return $this->hasMany(TbSatpam::class, 'id_pegawai');
 	}
 
 	public function tb_stafs()

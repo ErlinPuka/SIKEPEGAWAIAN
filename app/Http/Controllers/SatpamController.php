@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
-use App\Models\TbSupir;
+use App\Models\TbSatpam;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class SupirController extends Controller
+class SatpamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class SupirController extends Controller
      */
     public function index()
     {
-        $data = TbSupir::all();
-        $title = 'Hapus Supir';
+        $data = TbSatpam::all();
+        $title = 'Hapus Satpam';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('supir/index', compact('data'));
+        return view('satpam/index', compact('data'));
     }
 
     /**
@@ -31,7 +31,7 @@ class SupirController extends Controller
     public function create()
     {
         $data['pegawai'] = TbPegawai::all();
-        return view('supir/create', $data);
+        return view('satpam/create', $data);
     }
 
     /**
@@ -42,14 +42,12 @@ class SupirController extends Controller
      */
     public function store(Request $request)
     {
-        TbSupir::create([
+        TbSatpam::create([
             'id_pegawai' => $request->id_pegawai,
-            'transport'  => $request->transport,
-            'rit_angkutan'  => $request->rit_angkutan,
         ]);
         Alert::success("Success", "Data berhasil disimpan");
 
-        return redirect("supir");
+        return redirect("satpam");
     }
 
     /**
@@ -60,6 +58,7 @@ class SupirController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -68,11 +67,11 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TbSupir $supir)
+    public function edit(TbSatpam $satpam)
     {
-        $data["pegawaiExist"] = TbPegawai::find($supir->id_pegawai);
+        $data["pegawaiExist"] = TbPegawai::find($satpam->id_pegawai);
         $data['pegawai'] = TbPegawai::all();
-        return view('supir/edit', compact('supir'), $data);
+        return view('satpam/edit', compact('satpam'), $data);
     }
 
     /**
@@ -82,16 +81,14 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TbSupir $supir)
+    public function update(Request $request, TbSatpam $satpam)
     {
-        $supir->update([
+        $satpam->update([
             'id_pegawai' => $request->id_pegawai,
-            'transport'  => $request->transport,
-            'rit_angkutan'  => $request->rit_angkutan,
         ]);
         Alert::success("Success", "Data berhasil disimpan");
 
-        return redirect("supir");
+        return redirect("satpam");
     }
 
     /**
@@ -100,11 +97,11 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TbSupir $supir)
+    public function destroy(TbSatpam $satpam)
     {
-        $supir->delete();
+        $satpam->delete();
         Alert::success("Success", "Data berhasil dihapus");
 
-        return redirect("supir");
+        return redirect("satpam");
     }
 }

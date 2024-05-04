@@ -33,7 +33,6 @@
                             <thead>
                                 <tr>
                                     <th>Nama</th>
-                                    <th>Kehadiran</th>
                                     <th>Jumlah Palet</th>
                                     <th>Jam Kerja</th>
                                     <th>Aksi</th>

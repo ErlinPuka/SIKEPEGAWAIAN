@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PegawaiController extends Controller
 {
@@ -15,6 +17,9 @@ class PegawaiController extends Controller
     public function index()
     {
         $data = TbPegawai::all();
+        $title = 'Hapus Pegawai';
+        $text = "Apakah anda yakin untuk hapus?";
+        confirmDelete($title, $text);
         return view('pegawai/index', compact('data'));
     }
 
@@ -41,9 +46,11 @@ class PegawaiController extends Controller
             'alamat' => $request->alamat,
             'no_telp'  => $request->no_telp,
             'email'  => $request->email,
-            'password'  => md5($request->password),
+            'password'  => Hash::make($request->password),
         ]);
-        return redirect("pegawai")->with("message", "Data berhasil disimpan");
+        Alert::success("Success", "Data berhasil disimpan");
+
+        return redirect("pegawai");
     }
 
     /**
@@ -85,11 +92,12 @@ class PegawaiController extends Controller
         ];
 
         if ($request->password) {
-            $data['password'] = md5($request->password);
+            $data['password'] = Hash::make($request->password);
         }
 
         $pegawai->update($data);
-        return redirect("pegawai")->with("message", "Data berhasil disimpan");
+        Alert::success("Success", "Data berhasil disimpan");
+        return redirect("pegawai");
     }
 
     /**
@@ -101,6 +109,8 @@ class PegawaiController extends Controller
     public function destroy(TbPegawai $pegawai)
     {
         $pegawai->delete();
-        return redirect("pegawai")->with("message", "Data berhasil dihapus");
+        Alert::success("Success", "Data berhasil dihapus");
+
+        return redirect("pegawai");
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="">
 
 <head>
     <meta charset="UTF-8">
@@ -34,6 +34,9 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
+
+                        <li class="sidebar-title">Selamat Datang, {{ Auth::user()->nama_pegawai }}</li>
+
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item active ">
@@ -84,16 +87,31 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ url('absensi') }}" class='sidebar-link'>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Absensi Karyawan</span>
+                                <span>Presensi Karyawan</span>
                             </a>
+                            <ul class="submenu ">
+
+                                <li class="submenu-item  ">
+                                    <a href="{{ url('presensi/create') }}" class="submenu-link">Presensi</a>
+                                </li>
+                                <li class="submenu-item  ">
+                                    <a href="{{ url('presensi') }}" class="submenu-link">Data Presensi</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="{{ url('pengaturan') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item ">
+                            <a href="{{ route('logout') }}" class='sidebar-link'>
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -144,14 +162,12 @@
                 .catch(error => console.error('Terjadi kesalahan:', error));
         });
     </script>
-
-    <script src="{{ asset('static/js/components/dark.js') }}"></script>
     <script src="{{ asset('extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
 
     <script src="{{ asset('compiled/js/app.js') }}"></script>
 
-
+    @include('sweetalert::alert')
 
     <!-- Need: Apexcharts -->
     <script src="{{ asset('extensions/apexcharts/apexcharts.min.js') }}"></script>

@@ -6,6 +6,7 @@ use App\Models\TbJamKerja;
 use App\Models\TbPalet;
 use App\Models\TbPegawai;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaletController extends Controller
 {
@@ -18,6 +19,9 @@ class PaletController extends Controller
     {
         $data['palet1'] = TbPalet::where('jenis_palet', '=', 1)->get();
         $data['palet2'] = TbPalet::where('jenis_palet', '=', 2)->get();
+        $title = 'Hapus Palet';
+        $text = "Apakah anda yakin untuk hapus?";
+        confirmDelete($title, $text);
         return view('palet/index', compact('data'));
     }
 
@@ -46,7 +50,8 @@ class PaletController extends Controller
             'jumlah_palet'  => $request->jumlah_palet,
             'jenis_palet'  => $request->jenis_palet,
         ]);
-        return redirect("palet")->with("message", "Data berhasil disimpan");
+        Alert::success("Success", "Data berhasil disimpan");
+        return redirect("palet");
     }
 
     /**
@@ -88,7 +93,8 @@ class PaletController extends Controller
             'jumlah_palet'  => $request->jumlah_palet,
             'jenis_palet'  => $request->jenis_palet,
         ]);
-        return redirect("palet")->with("message", "Data berhasil disimpan");
+        Alert::success("Success", "Data berhasil disimpan");
+        return redirect("palet");
     }
 
     /**
@@ -100,6 +106,7 @@ class PaletController extends Controller
     public function destroy(TbPalet $palet)
     {
         $palet->delete();
-        return redirect("palet")->with("message", "Data berhasil dihapus");
+        Alert::success("Success", "Data berhasil dihapus");
+        return redirect("palet");
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
-use App\Models\TbSupir;
+use App\Models\TbPegMesin;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class SupirController extends Controller
+class MesinController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class SupirController extends Controller
      */
     public function index()
     {
-        $data = TbSupir::all();
-        $title = 'Hapus Supir';
+        $data = TbPegMesin::all();
+        $title = 'Hapus Pegawai Mesin';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('supir/index', compact('data'));
+        return view('mesin/index', compact('data'));
     }
 
     /**
@@ -31,7 +31,7 @@ class SupirController extends Controller
     public function create()
     {
         $data['pegawai'] = TbPegawai::all();
-        return view('supir/create', $data);
+        return view('mesin/create', $data);
     }
 
     /**
@@ -42,14 +42,14 @@ class SupirController extends Controller
      */
     public function store(Request $request)
     {
-        TbSupir::create([
+        TbPegMesin::create([
             'id_pegawai' => $request->id_pegawai,
-            'transport'  => $request->transport,
-            'rit_angkutan'  => $request->rit_angkutan,
+            'id_jam_kerja' => $request->id_jam_kerja,
+            'mesin'  => $request->mesin,
         ]);
         Alert::success("Success", "Data berhasil disimpan");
 
-        return redirect("supir");
+        return redirect("mesin");
     }
 
     /**
@@ -60,6 +60,7 @@ class SupirController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -68,11 +69,11 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TbSupir $supir)
+    public function edit(TbPegMesin $mesin)
     {
-        $data["pegawaiExist"] = TbPegawai::find($supir->id_pegawai);
+        $data["pegawaiExist"] = TbPegawai::find($mesin->id_pegawai);
         $data['pegawai'] = TbPegawai::all();
-        return view('supir/edit', compact('supir'), $data);
+        return view('mesin/edit', compact('mesin'), $data);
     }
 
     /**
@@ -82,16 +83,16 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TbSupir $supir)
+    public function update(Request $request, TbPegMesin $mesin)
     {
-        $supir->update([
+        $mesin->update([
             'id_pegawai' => $request->id_pegawai,
-            'transport'  => $request->transport,
-            'rit_angkutan'  => $request->rit_angkutan,
+            'id_jam_kerja' => $request->id_jam_kerja,
+            'mesin'  => $request->mesin,
         ]);
         Alert::success("Success", "Data berhasil disimpan");
 
-        return redirect("supir");
+        return redirect("mesin");
     }
 
     /**
@@ -100,11 +101,10 @@ class SupirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TbSupir $supir)
+    public function destroy(TbPegMesin $mesin)
     {
-        $supir->delete();
+        $mesin->delete();
         Alert::success("Success", "Data berhasil dihapus");
-
-        return redirect("supir");
+        return redirect("mesin");
     }
 }
