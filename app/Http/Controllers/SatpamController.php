@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
+use App\Models\TbPresensi;
 use App\Models\TbSatpam;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,7 +21,18 @@ class SatpamController extends Controller
         $title = 'Hapus Satpam';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('satpam/index', compact('data'));
+
+        $dataPresensi = TbPresensi::all();
+
+        $totalHariHadir = [];
+        foreach ($data as $satpam) {
+            $totalHariHadir[$satpam->id_pegawai] = TbPresensi::where('id_pegawai', $satpam->id_pegawai)
+                ->where('status_presensi', 'Hadir')
+                ->distinct('tanggal')
+                ->count('tanggal');
+        }
+
+        return view('satpam/index', compact('data', 'totalHariHadir'));
     }
 
     /**

@@ -44,21 +44,19 @@
                                         <td>{{ $supir->transport }}</td>
                                         <td>{{ $supir->rit_angkutan }}</td>
                                         <td>
-                                            <form action="{{ route('supir.destroy', $supir->id_supir) }}" method="POST">
-                                                <a href="{{ route('supir.edit', $supir->id_supir) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Supir">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('supir.edit', $supir->id_supir) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Supir">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('supir.destroy', $supir->id_supir) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

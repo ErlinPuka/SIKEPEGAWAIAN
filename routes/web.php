@@ -38,4 +38,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kenek', KenekController::class);
     Route::resource('satpam', SatpamController::class);
     Route::resource('presensi', PresensiController::class);
+    Route::resource('jam_kerja', JamKerjaController::class);
 });

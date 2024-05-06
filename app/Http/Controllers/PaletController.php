@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TbJamKerja;
 use App\Models\TbPalet;
 use App\Models\TbPegawai;
+use App\Models\TbPresensi;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -19,10 +20,28 @@ class PaletController extends Controller
     {
         $data['palet1'] = TbPalet::where('jenis_palet', '=', 1)->get();
         $data['palet2'] = TbPalet::where('jenis_palet', '=', 2)->get();
+
+        $dataPresensi = TbPresensi::all();
+
+        $totalHariHadir1 = [];
+        $totalHariHadir2 = [];
+        foreach ($data['palet1'] as $plt1) {
+            $totalHariHadir1[$plt1->id_pegawai] = TbPresensi::where('id_pegawai', $plt1->id_pegawai)
+                ->where('status_presensi', 'Hadir')
+                ->distinct('tanggal')
+                ->count('tanggal');
+        }
+        foreach ($data['palet2'] as $plt2) {
+            $totalHariHadir2[$plt2->id_pegawai] = TbPresensi::where('id_pegawai', $plt2->id_pegawai)
+                ->where('status_presensi', 'Hadir')
+                ->distinct('tanggal')
+                ->count('tanggal');
+        }
+
         $title = 'Hapus Palet';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('palet/index', compact('data'));
+        return view('palet/index', compact('data', 'totalHariHadir1', 'totalHariHadir2'));
     }
 
     /**

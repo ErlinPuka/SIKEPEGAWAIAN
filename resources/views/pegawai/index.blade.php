@@ -46,21 +46,19 @@
                                         <td>{{ $pegawai->no_telp }}</td>
                                         <td>{{ $pegawai->email }}</td>
                                         <td>
-                                            <form action="{{ route('pegawai.destroy', $pegawai->id_pegawai) }}" method="POST">
-                                                <a href="{{ route('pegawai.edit', $pegawai->id_pegawai) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Pegawai">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('pegawai.edit', $pegawai->id_pegawai) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Pegawai">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('pegawai.destroy', $pegawai->id_pegawai) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

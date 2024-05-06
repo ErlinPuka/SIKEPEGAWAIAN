@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TbPegawai;
 use App\Models\TbPegMesin;
+use App\Models\TbPresensi;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,11 +17,22 @@ class MesinController extends Controller
      */
     public function index()
     {
-        $data = TbPegMesin::all();
         $title = 'Hapus Pegawai Mesin';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('mesin/index', compact('data'));
+
+        $data = TbPegMesin::all();
+        $dataPresensi = TbPresensi::all();
+
+        $totalHariHadir = [];
+        foreach ($data as $mesin) {
+            $totalHariHadir[$mesin->id_pegawai] = TbPresensi::where('id_pegawai', $mesin->id_pegawai)
+                ->where('status_presensi', 'Hadir')
+                ->distinct('tanggal')
+                ->count('tanggal');
+        }
+
+        return view('mesin/index', compact('data', 'totalHariHadir'));
     }
 
     /**

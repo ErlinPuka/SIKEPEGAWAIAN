@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TbJamKerja;
 use App\Models\TbPegawai;
+use App\Models\TbPresensi;
 use App\Models\TbStaf;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -17,11 +18,22 @@ class StafController extends Controller
      */
     public function index()
     {
-        $data = TbStaf::all();
         $title = 'Hapus Staf';
         $text = "Apakah anda yakin untuk hapus?";
         confirmDelete($title, $text);
-        return view('staf/index', compact('data'));
+
+        $stafs = TbStaf::all();
+        $dataPresensi = TbPresensi::all();
+
+        $totalHariHadir = [];
+        foreach ($stafs as $staf) {
+            $totalHariHadir[$staf->id_pegawai] = TbPresensi::where('id_pegawai', $staf->id_pegawai)
+                ->where('status_presensi', 'Hadir')
+                ->distinct('tanggal')
+                ->count('tanggal');
+        }
+
+        return view('staf.index', compact('stafs', 'totalHariHadir'));
     }
 
     /**
@@ -108,6 +120,5 @@ class StafController extends Controller
         Alert::success("Success", "Data berhasil dihapus");
 
         return redirect("staf");
-
     }
 }

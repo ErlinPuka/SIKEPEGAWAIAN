@@ -39,28 +39,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $staf)
+                                @foreach ($stafs as $staf)
                                     <tr>
                                         <td>{{ $staf->tb_pegawai->nama_pegawai }}</td>
                                         <td>{{ $staf->jabatan }}</td>
-                                        <td></td>
+                                        <td>{{ $totalHariHadir[$staf->id_pegawai] }}</td>
                                         <td>{{ $staf->tb_jam_kerja->jam_kerja }}</td>
                                         <td>
-                                            <form action="{{ route('staf.destroy', $staf->id_staf) }}" method="POST">
-                                                <a href="{{ route('staf.edit', $staf->id_staf) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Staf">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('staf.edit', $staf->id_staf) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Staf">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('staf.destroy', $staf->id_staf) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

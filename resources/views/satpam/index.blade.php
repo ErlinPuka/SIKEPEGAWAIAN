@@ -40,23 +40,21 @@
                                 @foreach ($data as $satpam)
                                     <tr>
                                         <td>{{ $satpam->tb_pegawai->nama_pegawai }}</td>
-                                        <td></td>
+                                        <td>{{ $totalHariHadir[$satpam->id_pegawai] }}</td>
                                         <td>
-                                            <form action="{{ route('satpam.destroy', $satpam->id_satpam) }}" method="POST">
-                                                <a href="{{ route('satpam.edit', $satpam->id_satpam) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Satpam">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('satpam.edit', $satpam->id_satpam) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Satpam">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('satpam.destroy', $satpam->id_satpam) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

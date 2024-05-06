@@ -44,7 +44,7 @@ class PresensiController extends Controller
     {
         $validatedData = $request->validate([
             'tanggal' => 'required|date', // Pastikan tanggal diisi dan merupakan format tanggal yang valid
-            'presensi.*' => 'required|in:Hadir,Sakit', // Pastikan setiap opsi presensi adalah Hadir atau Sakit
+            'presensi.*' => 'required|in:Hadir,Sakit,Izin,Alpa', // Pastikan setiap opsi presensi adalah Hadir atau Sakit
         ]);
 
         // Simpan data presensi ke dalam database

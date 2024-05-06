@@ -10,13 +10,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Data Pegawai</h3>
+                        <h3>Data Jam Kerja</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Pegawai</li>
+                                <li class="breadcrumb-item active" aria-current="page">Jam Kerja</li>
                             </ol>
                         </nav>
                     </div>
@@ -25,42 +25,36 @@
             <section class="section">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ url('pegawai/create') }}"><button class="btn btn-success">Tambah Data</button></a>
+                        <a href="{{ url('jam_kerja/create') }}"><button class="btn btn-success">Tambah Data</button></a>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped" id="table1">
                             <thead>
                                 <tr>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>No Telp</th>
-                                    <th>Email</th>
+                                    <th>Jam Kerja</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $pegawai)
+                                @foreach ($data as $jam_kerja)
                                     <tr>
-                                        <td>{{ $pegawai->nama_pegawai }}</td>
-                                        <td>{{ $pegawai->alamat }}</td>
-                                        <td>{{ $pegawai->no_telp }}</td>
-                                        <td>{{ $pegawai->email }}</td>
+                                        <td>{{ $jam_kerja->tb_pegawai->nama_pegawai }}</td>
+                                        <td>{{ $jam_kerja->jam_kerja }}</td>
                                         <td>
-                                            <form action="{{ route('pegawai.destroy', $pegawai->id_pegawai) }}" method="POST">
-                                                <a href="{{ route('pegawai.edit', $pegawai->id_pegawai) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Pegawai">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('jam_kerja.edit', $jam_kerja->id_jam_kerja) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Jam Kerja">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('jam_kerja.destroy', $jam_kerja->id_jam_kerja) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

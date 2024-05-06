@@ -42,25 +42,23 @@
                                 @foreach ($data['palet1'] as $plt1)
                                     <tr>
                                         <td>{{ $plt1->tb_pegawai->nama_pegawai }}</td>
-                                        <td></td>
+                                        <td>{{ $totalHariHadir1[$plt1->id_pegawai] }}</td>
                                         <td>{{ $plt1->jumlah_palet }}</td>
                                         <td>{{ $plt1->tb_jam_kerja->jam_kerja }}</td>
                                         <td>
-                                            <form action="{{ route('palet.destroy', $plt1->id_palet) }}" method="POST">
-                                                <a href="{{ route('palet.edit', $plt1->id_palet) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Palet">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('palet.edit', $plt1->id_palet) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Palet">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('palet.destroy', $plt1->id_palet) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -82,25 +80,23 @@
                                 @foreach ($data['palet2'] as $plt1)
                                     <tr>
                                         <td>{{ $plt1->tb_pegawai->nama_pegawai }}</td>
-                                        <td></td>
+                                        <td>{{ $totalHariHadir2[$plt1->id_pegawai] }}</td>
                                         <td>{{ $plt1->jumlah_palet }}</td>
                                         <td>{{ $plt1->tb_jam_kerja->jam_kerja }}</td>
                                         <td>
-                                            <form action="{{ route('palet.destroy', $plt1->id_palet) }}" method="POST">
-                                                <a href="{{ route('palet.edit', $plt1->id_palet) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Palet">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('palet.edit', $plt1->id_palet) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Palet">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('palet.destroy', $plt1->id_palet) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

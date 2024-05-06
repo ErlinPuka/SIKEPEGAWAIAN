@@ -39,26 +39,21 @@
                                     <tr>
                                         <td>{{ $presensi->tb_pegawai->nama_pegawai }}</td>
                                         <td>{{ $presensi->status_presensi }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($presensi->tanggal)->format('d-m-Y')}}</td>
+                                        <td>{{ \Carbon\Carbon::parse($presensi->tanggal)->format('d-m-Y') }}</td>
                                         <td>
-                                            <a href="{{ route('presensi.destroy', $presensi->id_presensi) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-
-                                            <form action="{{ route('presensi.destroy', $presensi->id_presensi) }}" method="POST">
-                                                <a href="{{ route('presensi.edit', $presensi->id_presensi) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit Presensi">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="bi bi-trash"></i>
+                                            <a href="{{ route('presensi.edit', $presensi->id_presensi) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                data-original-title="Edit Presensi">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-pencil"></i>
                                                 </button>
-
-                                            </form>
+                                            </a>
+                                            <a href="{{ route('presensi.destroy', $presensi->id_presensi) }}"
+                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
+                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
+                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

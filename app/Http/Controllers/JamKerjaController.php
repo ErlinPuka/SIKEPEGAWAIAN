@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\TbJamKerja;
+use App\Models\TbPegawai;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JamKerjaController extends Controller
 {
     public function getJamKerjaByPegawai($pegawaiId)
     {
-        // Ambil data jam kerja berdasarkan ID pegawai
         $jamKerja = TbJamKerja::where('id_pegawai', $pegawaiId)->get();
-
-        // Kirim data jam kerja dalam format JSON
         return response()->json($jamKerja);
     }
 
@@ -23,7 +22,13 @@ class JamKerjaController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Hapus Staf';
+        $text = "Apakah anda yakin untuk hapus?";
+        confirmDelete($title, $text);
+
+        $data = TbJamKerja::all();
+
+        return view('jam_kerja.index', compact('data'));
     }
 
     /**
@@ -33,7 +38,8 @@ class JamKerjaController extends Controller
      */
     public function create()
     {
-        //
+        $data['pegawai'] = TbPegawai::all();
+        return view('jam_kerja/create', $data);
     }
 
     /**
@@ -44,7 +50,13 @@ class JamKerjaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        TbJamKerja::create([
+            'id_pegawai' => $request->id_pegawai,
+            'jam_kerja'  => $request->jam_kerja,
+        ]);
+        Alert::success("Success", "Data berhasil disimpan");
+
+        return redirect("jam_kerja");
     }
 
     /**
@@ -64,9 +76,11 @@ class JamKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TbJamKerja $jam_kerja)
     {
-        //
+        $data["pegawaiExist"] = TbPegawai::find($jam_kerja->id_pegawai);
+        $data['pegawai'] = TbPegawai::all();
+        return view('jam_kerja/edit', compact('jam_kerja'), $data);
     }
 
     /**
@@ -76,9 +90,15 @@ class JamKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TbJamKerja $jam_kerja)
     {
-        //
+        $jam_kerja->update([
+            'id_pegawai' => $request->id_pegawai,
+            'jam_kerja'  => $request->jam_kerja,
+        ]);
+        Alert::success("Success", "Data berhasil disimpan");
+
+        return redirect("jam_kerja");
     }
 
     /**
@@ -87,8 +107,11 @@ class JamKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TbJamKerja $jam_kerja)
     {
-        //
+        $jam_kerja->delete();
+        Alert::success("Success", "Data berhasil dihapus");
+
+        return redirect("jam_kerja");
     }
 }
