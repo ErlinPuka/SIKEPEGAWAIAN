@@ -54,10 +54,8 @@
                                                 </button>
                                             </a>
                                             <a href="{{ route('pegawai.destroy', $pegawai->id_pegawai) }}"
-                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
-                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
-                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
-                                                </button>
+                                                class="btn btn-danger font-weight-bold text-xs" data-confirm-delete="true">
+                                                Delete
                                             </a>
                                         </td>
                                     </tr>

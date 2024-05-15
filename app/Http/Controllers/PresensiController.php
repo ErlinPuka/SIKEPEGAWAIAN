@@ -43,13 +43,10 @@ class PresensiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tanggal' => 'required|date', // Pastikan tanggal diisi dan merupakan format tanggal yang valid
-            'presensi.*' => 'required|in:Hadir,Sakit,Izin,Alpa', // Pastikan setiap opsi presensi adalah Hadir atau Sakit
+            'tanggal' => 'required|date',
+            'presensi.*' => 'required|in:Hadir,Sakit,Izin,Alpa',
         ]);
-
-        // Simpan data presensi ke dalam database
         foreach ($validatedData['presensi'] as $pegawaiId => $statusPresensi) {
-            // Lakukan operasi penyimpanan data presensi di sini
             $presensi = new TbPresensi();
             $presensi->id_pegawai = $pegawaiId;
             $presensi->status_presensi = $statusPresensi;

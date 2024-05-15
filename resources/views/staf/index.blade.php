@@ -44,7 +44,7 @@
                                         <td>{{ $staf->tb_pegawai->nama_pegawai }}</td>
                                         <td>{{ $staf->jabatan }}</td>
                                         <td>{{ $totalHariHadir[$staf->id_pegawai] }}</td>
-                                        <td>{{ $staf->tb_jam_kerja->jam_kerja }}</td>
+                                        <td>{{ $staf->tb_jam_kerja->jam_kerja }} Jam</td>
                                         <td>
                                             <a href="{{ route('staf.edit', $staf->id_staf) }}"
                                                 class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
@@ -54,10 +54,8 @@
                                                 </button>
                                             </a>
                                             <a href="{{ route('staf.destroy', $staf->id_staf) }}"
-                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
-                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
-                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
-                                                </button>
+                                                class="btn btn-danger font-weight-bold text-xs" data-confirm-delete="true">
+                                                Delete
                                             </a>
                                         </td>
                                     </tr>

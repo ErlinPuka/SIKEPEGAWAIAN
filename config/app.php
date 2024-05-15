@@ -195,6 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -215,4 +216,5 @@ return [
 
     ])->toArray(),
 
+    'PDF' => Barryvdh\DomPDF\Facade::class,
 ];

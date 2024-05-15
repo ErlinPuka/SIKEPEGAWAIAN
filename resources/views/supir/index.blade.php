@@ -32,6 +32,7 @@
                             <thead>
                                 <tr>
                                     <th>Nama</th>
+                                    <th>Jam Kerja</th>
                                     <th>Transport</th>
                                     <th>Rit Angkutan</th>
                                     <th>Aksi</th>
@@ -41,6 +42,7 @@
                                 @foreach ($data as $supir)
                                     <tr>
                                         <td>{{ $supir->tb_pegawai->nama_pegawai }}</td>
+                                        <td>{{ $supir->tb_jam_kerja->jam_kerja }} Jam</td>
                                         <td>{{ $supir->transport }}</td>
                                         <td>{{ $supir->rit_angkutan }}</td>
                                         <td>
@@ -52,10 +54,8 @@
                                                 </button>
                                             </a>
                                             <a href="{{ route('supir.destroy', $supir->id_supir) }}"
-                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
-                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
-                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
-                                                </button>
+                                                class="btn btn-danger font-weight-bold text-xs" data-confirm-delete="true">
+                                                Delete
                                             </a>
                                         </td>
                                     </tr>

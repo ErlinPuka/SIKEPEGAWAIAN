@@ -111,9 +111,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="{{ url('payroll') }}" class='sidebar-link'>
+                            <a href="{{ url('penggajian') }}" class='sidebar-link'>
                                 <i class="bi bi-cash-stack"></i>
-                                <span>Payroll</span>
+                                <span>Penggajian</span>
                             </a>
                         </li>
                         <li class="sidebar-item  has-sub">
@@ -130,12 +130,6 @@
                                     <a href="{{ url('presensi') }}" class="submenu-link">Data Presensi</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{ url('pengaturan') }}" class='sidebar-link'>
-                                <i class="bi bi-gear-fill"></i>
-                                <span>Pengaturan</span>
-                            </a>
                         </li>
                         <li class="sidebar-item ">
                             <a href="{{ route('logout') }}" class='sidebar-link'>
@@ -205,7 +199,7 @@
                         data.forEach(jamKerja => {
                             const option = document.createElement('option');
                             option.value = jamKerja.id_jam_kerja;
-                            option.textContent = jamKerja.jam_kerja;
+                            option.textContent = jamKerja.jam_kerja + " Jam";
                             selectJamKerja.appendChild(option);
                         });
                     })
@@ -223,7 +217,7 @@
                     data.forEach(jamKerja => {
                         const option = document.createElement('option');
                         option.value = jamKerja.id_jam_kerja;
-                        option.textContent = jamKerja.jam_kerja;
+                        option.textContent = jamKerja.jam_kerja + " Jam";
                         selectJamKerja.appendChild(option);
                     });
                 })

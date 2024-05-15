@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JamKerjaController;
 use App\Http\Controllers\KenekController;
@@ -6,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\PaletController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PenggajianController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\SatpamController;
 use App\Http\Controllers\StafController;
@@ -39,4 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('satpam', SatpamController::class);
     Route::resource('presensi', PresensiController::class);
     Route::resource('jam_kerja', JamKerjaController::class);
+    Route::resource('penggajian', PenggajianController::class);
+    Route::get('penggajian/export-pdf/{id_penggajian}', [PenggajianController::class, 'exportPdf']);
 });

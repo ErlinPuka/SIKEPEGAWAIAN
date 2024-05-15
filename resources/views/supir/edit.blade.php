@@ -29,7 +29,8 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="{{ route('supir.update', $supir->id_supir) }}" method="post" enctype="multipart/form-data">
+                                    <form class="form form-vertical" action="{{ route('supir.update', $supir->id_supir) }}"
+                                        method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-body">
@@ -47,6 +48,15 @@
                                                                     {{ $k->nama_pegawai }}
                                                                 </option>
                                                             @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="contact-info-vertical">Jam Kerja</label>
+                                                        <select class="form-control" name="id_jam_kerja" id="id_jam_kerja"
+                                                            required>
+                                                            <option value="" selected>Pilih Jam Kerja</option>
                                                         </select>
                                                     </div>
                                                 </div>

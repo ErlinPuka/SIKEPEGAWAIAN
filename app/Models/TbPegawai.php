@@ -6,8 +6,8 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -24,6 +24,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Collection|TbKenek[] $tb_keneks
  * @property Collection|TbPalet[] $tb_palets
  * @property Collection|TbPegMesin[] $tb_peg_mesins
+ * @property Collection|TbPenggajian[] $tb_penggajians
  * @property Collection|TbPresensi[] $tb_presensis
  * @property Collection|TbSatpam[] $tb_satpams
  * @property Collection|TbStaf[] $tb_stafs
@@ -67,6 +68,11 @@ class TbPegawai extends Authenticatable
 	public function tb_peg_mesins()
 	{
 		return $this->hasMany(TbPegMesin::class, 'id_pegawai');
+	}
+
+	public function tb_penggajians()
+	{
+		return $this->hasMany(TbPenggajian::class, 'id_pegawai');
 	}
 
 	public function tb_presensis()

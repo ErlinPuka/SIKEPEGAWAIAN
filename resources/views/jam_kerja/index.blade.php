@@ -40,7 +40,7 @@
                                 @foreach ($data as $jam_kerja)
                                     <tr>
                                         <td>{{ $jam_kerja->tb_pegawai->nama_pegawai }}</td>
-                                        <td>{{ $jam_kerja->jam_kerja }}</td>
+                                        <td>{{ $jam_kerja->jam_kerja }} Jam</td>
                                         <td>
                                             <a href="{{ route('jam_kerja.edit', $jam_kerja->id_jam_kerja) }}"
                                                 class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
@@ -50,10 +50,8 @@
                                                 </button>
                                             </a>
                                             <a href="{{ route('jam_kerja.destroy', $jam_kerja->id_jam_kerja) }}"
-                                                class="text-secondary font-weight-bold text-xs" data-confirm-delete="true">
-                                                <button class="btn btn-danger" type="button" data-confirm-delete="true">
-                                                    <i class="bi bi-trash" data-confirm-delete="true"></i>
-                                                </button>
+                                                class="btn btn-danger font-weight-bold text-xs" data-confirm-delete="true">
+                                                Delete
                                             </a>
                                         </td>
                                     </tr>
