@@ -27,10 +27,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/get-jam-kerja/{pegawaiId}', [JamKerjaController::class, 'getJamKerjaByPegawai']);
 
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::get('register', [LoginController::class, 'showRegisterForm'])->name('register')->middleware('guest');
 Route::post('login', [LoginController::class, 'login']);
+Route::post('register', [LoginController::class, 'register']);
 Route::middleware(['auth'])->group(function () {
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::resource('pegawai', PegawaiController::class);
     Route::resource('staf', StafController::class);

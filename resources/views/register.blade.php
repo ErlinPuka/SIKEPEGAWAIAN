@@ -1,45 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Register</title>
-        <link rel="Shortcut icon" href = "{{ asset('images/Logobaru.jpg') }}"alt="">
-        <link rel="stylesheet" href="{{  asset('css/register.css') }}" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto:wght@500;700&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrasi - CVIndahCemerlang</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Indah Cemerlang</title>
+
+    <link rel="Shortcut icon" href = "{{ asset('images/Logobaru.jpg') }}"alt="">
+    <link rel="stylesheet" crossorigin href="{{ asset('compiled/css/app.css') }}">
+    <link rel="stylesheet" crossorigin href="{{ asset('compiled/css/iconly.css') }}">
+    <link rel="stylesheet" href="{{ asset('extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" crossorigin href="{{ asset('compiled/css/table-datatable.css') }}">
+    <link rel="stylesheet" crossorigin href="{{ asset('compiled/css/auth.css') }}">
+
+</head>
+
 <body>
-    <div class="register-container">
-        <div class="register-box">
-            <h2><i class="fas fa-user-plus"></i> Registrasi</h2>
-            <form>
-                <div class="form-group">
-                    <label for="name"><i class="fas fa-user"></i> Nama Lengkap</label>
-                    <input type="text" id="name" placeholder="Masukkan nama lengkap">
+    <script src="{{ asset('static/js/initTheme.js') }}"></script>
+    <div id="auth">
+
+        <div class="row h-100">
+            <div class="col-lg-6 col-12">
+                <div id="auth-left">
+                    <h1 class="auth-title">Register.</h1>
+                    <p class="auth-subtitle mb-4">Silakan register untuk mendapatkan akses</p>
+
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
+                        <div class="form-group position-relative  mb-4">
+                            <input type="text" name="nama_pegawai" class="form-control form-control-xl" placeholder="Nama">
+                        </div>
+                        <div class="form-group position-relative  mb-4">
+                            <input type="text" name="alamat" class="form-control form-control-xl" placeholder="Alamat">
+                        </div>
+                        <div class="form-group position-relative  mb-4">
+                            <input type="text" name="no_telp" class="form-control form-control-xl" placeholder="Nomor Telepon">
+                        </div>
+                        <div class="form-group position-relative  mb-4">
+                            <input type="email" name="email" class="form-control form-control-xl" placeholder="Email">
+                        </div>
+                        <div class="form-group position-relative  mb-4">
+                            <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Register</button>
+                    </form>
+                    <div class="text-center text-lg fs-4 mt-3">
+                        <p class="text-gray-600">Sudah punya akun? <a href="{{ url('login') }}" class="font-bold">Log in</a>.</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" id="email" placeholder="Masukkan email">
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div id="auth-right" class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-center">
+                        <img src="{{ asset('images/Logobaru.jpg') }}" alt="Logo">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password"><i class="fas fa-lock"></i> Password</label>
-                    <input type="password" id="password" placeholder="Masukkan password">
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password"><i class="fas fa-lock"></i> Konfirmasi Password</label>
-                    <input type="password" id="confirm-password" placeholder="Konfirmasi password">
-                </div>
-                <button type="submit" class="btn"><i class="fas fa-user-plus"></i> Daftar</button>
-            </form>
-            <div class="login-link">
-                <p>Sudah punya akun? <a href="/">Login</a></p>
             </div>
         </div>
+
     </div>
+
+    <script src="{{ asset('static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+
+    <script src="{{ asset('compiled/js/app.js') }}"></script>
+
+    @include('sweetalert::alert')
+
+    <!-- Need: Apexcharts -->
+    <script src="{{ asset('extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('static/js/pages/dashboard.js') }}"></script>
+
+    <script src="{{ asset('extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('static/js/pages/simple-datatables.js') }}"></script>
+
 </body>
+
 </html>

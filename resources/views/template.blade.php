@@ -132,7 +132,7 @@
                             </ul>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="{{ route('logout') }}" class='sidebar-link'>
+                            <a href="#" class='sidebar-link' id="logout-link">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Logout</span>
                             </a>
@@ -150,6 +150,38 @@
     <script src="{{ asset('compiled/js/app.js') }}"></script>
 
     @include('sweetalert::alert')
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Anda perlu login ulang untuk mengakses website!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim permintaan logout menggunakan AJAX
+                    fetch('{{ route('logout') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    }).then(response => {
+                        if (response.ok) {
+                            window.location.href = '{{ url('login') }}';
+                        } else {
+                            console.error('Logout failed');
+                        }
+                    }).catch(error => console.error('Logout error:', error));
+                }
+            });
+        });
+    </script>
 
     <!-- Need: Apexcharts -->
     <script src="{{ asset('extensions/apexcharts/apexcharts.min.js') }}"></script>

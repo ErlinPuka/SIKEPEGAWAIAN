@@ -44,6 +44,7 @@ class SupirController extends Controller
     {
         TbSupir::create([
             'id_pegawai' => $request->id_pegawai,
+            'id_jam_kerja'=> $request->id_jam_kerja,
             'transport'  => $request->transport,
             'rit_angkutan'  => $request->rit_angkutan,
         ]);

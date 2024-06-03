@@ -36,7 +36,7 @@ class PenggajianController extends Controller
 
         foreach ($data as $pegawai) {
             $pegawai->tipe = $this->checkPegawaiType($pegawai->id_pegawai);
-            $pegawai->jenis_penggajian = ($pegawai->tipe === 'Supir' || $pegawai->tipe === 'Palet') ? 'Harian' : 'Bulanan';
+            $pegawai->jenis_penggajian = ($pegawai->tipe === 'Supir' || $pegawai->tipe === 'Palet' || $pegawai->tipe === 'Kenek' || $pegawai->tipe === 'Satpam') ? 'Harian' : 'Bulanan';
             $pegawai->jumlah_kehadiran = $this->getJumlahKehadiran($pegawai->id_pegawai, $year, $month);
             $pegawai->total_gaji = $this->hitungGaji($pegawai, $year, $month);
             $pegawai->sudah_digaji = $this->checkSudahDigaji($pegawai->id_pegawai, $year, $month);
@@ -91,16 +91,17 @@ class PenggajianController extends Controller
                 if ($pegawai->tipe === 'Supir') {
                     $dataSupir = TbSupir::where('id_pegawai', $pegawai->id_pegawai)->first();
                     $totalGaji = $dataSupir->rit_angkutan * 100000;
+                } elseif ($pegawai->tipe === 'Kenek') {
+                    $dataKenek = TbKenek::where('id_pegawai', $pegawai->id_pegawai)->first();
+                    $totalGaji = $dataKenek->rit_angkutan * 100000;
                 } elseif ($pegawai->tipe === 'Palet') {
+                    $totalGaji = $pegawai->jam_kerja * 20000;
+                } elseif ($pegawai->tipe === 'Satpam') {
                     $totalGaji = $pegawai->jam_kerja * 20000;
                 }
                 $totalGaji *= $pegawai->jumlah_kehadiran;
             } elseif ($pegawai->jenis_penggajian === 'Bulanan') {
-                if ($pegawai->tipe === 'Staf') {
-                    $totalGaji = 3000000 - ($jumlahTidakMasuk * 50000);
-                } else{
-                    $totalGaji *= $pegawai->jumlah_kehadiran;
-                }
+                $totalGaji = 3000000 - ($jumlahTidakMasuk * 50000);
             }
         }
 

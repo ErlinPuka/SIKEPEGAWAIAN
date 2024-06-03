@@ -23,7 +23,7 @@
             <div class="col-lg-6 col-12">
                 <div id="auth-left">
                     <h1 class="auth-title">Log in.</h1>
-                    <p class="auth-subtitle mb-5">Silakan log in untuk mulai mengakses web ini</p>
+                    <p class="auth-subtitle mb-4">Silakan log in untuk mulai mengakses web ini</p>
 
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
@@ -39,8 +39,12 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Log in</button>
                     </form>
+                    <div class="text-center text-lg fs-4 mt-3">
+                        <p class="text-gray-600">Tidak punya akun? <a href="{{ url('register') }}" class="font-bold">Sign
+                                up</a>.</p>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 d-none d-lg-block">
