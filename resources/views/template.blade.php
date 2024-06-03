@@ -163,7 +163,6 @@
                 confirmButtonText: 'Yes, logout!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Kirim permintaan logout menggunakan AJAX
                     fetch('{{ route('logout') }}', {
                         method: 'POST',
                         headers: {
